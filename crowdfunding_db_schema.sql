@@ -9,7 +9,7 @@
 );
 
 CREATE TABLE subcategory (
-    "subcategory_id" int   NOT NULL,
+    "subcategory_id" VARCHAR(50)   NOT NULL,
     "subcategory" VARCHAR(50)   NOT NULL,
     CONSTRAINT "pk_subcategory" PRIMARY KEY (
         "subcategory_id"
@@ -17,18 +17,18 @@ CREATE TABLE subcategory (
 );
 
 CREATE TABLE category (
-    "category_id" int   NOT NULL,
+    "category_id" VARCHAR(50)   NOT NULL,
     "category" VARCHAR(50)   NOT NULL,
     CONSTRAINT "pk_category" PRIMARY KEY (
         "category_id"
      )
 );
 
-CREATE TABLE product (
+CREATE TABLE campaign (
     "cf_id" int   NOT NULL,
     "contact_id" int   NOT NULL,
     "company_name" VARCHAR(50)   NOT NULL,
-    "description" VARCHAR(50)   NOT NULL,
+    "description" VARCHAR(100)   NOT NULL,
     "goal" money   NOT NULL,
     "pledged" money   NOT NULL,
     "outcome" VARCHAR(50)   NOT NULL,
@@ -37,19 +37,19 @@ CREATE TABLE product (
     "currency" VARCHAR(50)   NOT NULL,
     "launched_date" TIMESTAMP   NOT NULL,
     "end_date" TIMESTAMP   NOT NULL,
-    "category_id" int   NOT NULL,
-    "subcategory_id" int   NOT NULL,
+    "category_id" VARCHAR(50)   NOT NULL,
+    "subcategory_id" VARCHAR(50)   NOT NULL,
     CONSTRAINT "pk_product" PRIMARY KEY (
         "cf_id"
      )
 );
 
-ALTER TABLE "product" ADD CONSTRAINT "fk_product_contact_id" FOREIGN KEY("contact_id")
+ALTER TABLE "campaign" ADD CONSTRAINT "fk_campaign_contact_id" FOREIGN KEY("contact_id")
 REFERENCES "contacts" ("contact_id");
 
-ALTER TABLE "product" ADD CONSTRAINT "fk_product_category_id" FOREIGN KEY("category_id")
+ALTER TABLE "campaign" ADD CONSTRAINT "fk_campaign_category_id" FOREIGN KEY("category_id")
 REFERENCES "category" ("category_id");
 
-ALTER TABLE "product" ADD CONSTRAINT "fk_product_subcategory_id" FOREIGN KEY("subcategory_id")
+ALTER TABLE "campaign" ADD CONSTRAINT "fk_campaign_subcategory_id" FOREIGN KEY("subcategory_id")
 REFERENCES "subcategory" ("subcategory_id");
 
